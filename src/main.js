@@ -7,6 +7,7 @@ import router from './router'
 import './firebase'
 
 import './assets/scss/jemx.scss'
+import './registerServiceWorker'
 
 const app = createApp(App)
 

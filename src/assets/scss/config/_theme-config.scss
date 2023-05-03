@@ -1,0 +1,64 @@
+@use 'sass:map';
+
+@use '../utitilies/functions/config';
+
+$colors: (
+  'font-color': (
+    'base': #dcdbdf,
+    'alternate': #29263a
+  ),
+  'background-color': (
+    'base': #29263a,
+    'alternate': #dcdbdf
+  ),
+  'border-color': (
+    'base': #dcdbdf,
+    'alternate': #29263a
+  ),
+  'accent': (
+    'primary': #8cc749,
+    'light': #dcdbdf,
+    'grey': #706d7e,
+    'medium': #34304a,
+    'dark': #29263a
+  ),
+  'priority': (
+    'very-low': #0b69b3,
+    'low': #01ae72,
+    'medium': #ffb800,
+    'high': #ef612c,
+    'very-hight': #ec3536
+  )
+);
+
+@function font-color($alternate: true) {
+  @if $alternate {
+    @return config.get($colors, 'font-color', 'base');
+  } @else {
+    @return config.get($colors, 'font-color', 'alternate');
+  }
+}
+
+@function background-color($alternate: true) {
+  @if $alternate {
+    @return config.get($colors, 'background-color', 'base');
+  } @else {
+    @return config.get($colors, 'background-color', 'alternate');
+  }
+}
+
+@function border-color($alternate: true) {
+  @if $alternate {
+    @return config.get($colors, 'border-color', 'base');
+  } @else {
+    @return config.get($colors, 'border-color', 'alternate');
+  }
+}
+
+@function accent($name: false) {
+  @return config.get($colors, 'accent', $name);
+}
+
+@function priority($priority: false) {
+  @return config.get($colors, 'priority', $priority);
+}

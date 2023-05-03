@@ -1,0 +1,62 @@
+// @use 'sass:map';
+@use '../utitilies/functions/config';
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:ital,wght@0,300;0,700;1,300;1,700&display=swap');
+
+$base-config: (
+  'font-sizes': (
+    's': 18px,
+    'm': 19px,
+    'l': 20px,
+    'xl': 22px,
+    'xxl': 24px
+  ),
+  'headings': (
+    'h1': 3rem,
+    'h2': 2rem,
+    'h3': 1.8rem,
+    'h4': 1.5rem,
+    'h5': 1.2rem,
+    'h6': 1rem
+  ),
+  'line-height': 1.5em,
+  'font-families': (
+    'normal': (
+      'Roboto',
+      sans-serif
+    ),
+    'title': (
+      'Roboto Condensed',
+      sans-serif
+    )
+  ),
+  'border': (
+    'thin': 1px,
+    'medium': 2px,
+    'thick': 4px
+  ),
+  'border-radius': (
+    'small': 0.2rem,
+    'normal': 0.3rem,
+    'large': 0.6rem
+  )
+);
+
+@function font-sizes($size: false) {
+  @return config.get($base-config, 'font-sizes', $size);
+}
+@function headings($size: false) {
+  @return config.get($base-config, 'headings', $size);
+}
+@function line-height() {
+  @return config.get($base-config, 'line-height');
+}
+@function font-family($name: false) {
+  @return config.get($base-config, 'font-families', $name);
+}
+@function border($thickness: false) {
+  @return config.get($base-config, 'border', $thickness);
+}
+@function border-radius($size: false) {
+  @return config.get($base-config, 'border-radius', $size);
+}

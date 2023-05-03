@@ -1,0 +1,12 @@
+@use '../utitilies/mixins/color';
+
+@use '../config/theme-config' as theme;
+
+body {
+  color: theme.font-color();
+  background-color: theme.background-color();
+}
+
+@include color.generate-classes(theme.accent(), theme.font-color(), theme.font-color(false));
+
+@include color.generate-classes(theme.priority(), theme.font-color(), theme.font-color(false));

@@ -1,0 +1,22 @@
+@use '../../helper/border';
+
+@use '../../config/base-config' as base;
+
+input,
+select,
+textarea {
+  @extend .border-thin;
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1em;
+  font-family: base.font-family('normal');
+
+  &:focus {
+    outline: none;
+  }
+}
+
+input[type='color'] {
+  width: 2rem;
+  height: 2.25rem;
+}

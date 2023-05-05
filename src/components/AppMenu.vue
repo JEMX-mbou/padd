@@ -65,7 +65,7 @@ function toggleMenu() {
   background-color: theme.accent('medium');
   translate: -100% 0;
   z-index: 5;
-  transition: translate 0.5s ease;
+  transition: translate 0.5s ease-in;
 
   ul,
   li {
@@ -118,12 +118,30 @@ function toggleMenu() {
     .inner::before,
     .inner::after {
       position: absolute;
+      left: 0;
+      transition: top 0.1s ease, left 0.1s ease, width 0.5s ease-in, rotate 0.3s ease-in;
     }
     .inner::before {
       top: -0.5rem;
     }
     .inner::after {
       top: 0.5rem;
+    }
+
+    &.is-active {
+      .inner::before,
+      .inner::after {
+        left: -0.1rem;
+        width: 1.2rem;
+      }
+      .inner::before {
+        top: -0.4rem;
+        rotate: -45deg;
+      }
+      .inner::after {
+        top: 0.4rem;
+        rotate: 45deg;
+      }
     }
   }
 

@@ -5,9 +5,21 @@
     </div>
     <div class="pages">
       <ul>
-        <li><button-comp link="./dashboard" class="invert light big">Dashboard</button-comp></li>
-        <li><button-comp link="./tasks" class="invert light big">Tasks</button-comp></li>
-        <li><button-comp link="./tasks" class="invert light big">Tasks</button-comp></li>
+        <li>
+          <button-comp @click="toggleMenu" link="./dashboard" class="invert light big"
+            >Dashboard</button-comp
+          >
+        </li>
+        <li>
+          <button-comp @click="toggleMenu" link="./tasks" class="invert light big"
+            >Tasks</button-comp
+          >
+        </li>
+        <li>
+          <button-comp @click="toggleMenu" link="./tasks" class="invert light big"
+            >Tasks</button-comp
+          >
+        </li>
       </ul>
     </div>
     <div class="user">
@@ -20,7 +32,6 @@
 import ButtonComp from './form/ButtonComp.vue'
 
 import { ref } from 'vue'
-import { getAuth } from '@firebase/auth'
 import { useRouter } from 'vue-router'
 
 import { useAuthStore } from '../stores/authStore'
@@ -54,6 +65,7 @@ function toggleMenu() {
   background-color: theme.accent('medium');
   translate: -100% 0;
   z-index: 5;
+  transition: translate 0.5s ease;
 
   ul,
   li {

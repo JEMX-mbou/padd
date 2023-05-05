@@ -1,36 +1,32 @@
 <template>
-  <main :class="!state.isLoggedIn ? 'splash' : ''">
+  <main :class="!authRefs.isLoggedIn.value ? 'splash' : ''">
+    <app-menu v-if="authRefs.isLoggedIn.value" />
     <RouterView />
   </main>
 </template>
 
 <script setup>
-import { RouterView } from 'vue-router'
-import { getAuth } from 'firebase/auth'
-import { reactive } from 'vue'
-import { useRouter } from 'vue-router'
+import AppMenu from './components/AppMenu.vue'
 
-const state = reactive({
-  isLoggedIn: false
-})
+import { RouterView, useRouter } from 'vue-router'
+
+import { useAuthStore } from './stores/authStore'
+import { storeToRefs } from 'pinia'
+
+const authStore = useAuthStore()
+
+authStore.setAuth()
+
+const authRefs = storeToRefs(useAuthStore())
 
 const router = useRouter()
 
-const auth = getAuth()
+authStore.auth.onAuthStateChanged((user) => {
+  authStore.setUser(user)
 
-const nonUserPages = ['home', 'signin', 'register']
-
-const currentPage = router.currentRoute._value.name
-
-auth.onAuthStateChanged((user) => {
-  if (user) {
-    state.isLoggedIn = true
-
-    if (typeof currentPage == 'undefined' || nonUserPages.includes(currentPage)) {
-      router.push('./dashboard')
-    }
-  } else {
-    state.isLoggedIn = false
+  if (router.currentRoute.value.meta.requiresAuth && !user) {
+    console.log('Dissallowed')
+    router.push('./signin')
   }
 })
 </script>
@@ -43,6 +39,8 @@ body {
 }
 
 main {
+  padding: 1rem;
+
   &.splash {
     @include gradient.linear(
       $deg: 20deg,
@@ -61,7 +59,6 @@ main {
       background-size: cover;
       background-position: center;
       mix-blend-mode: color-burn;
-      z-index: -1;
     }
   }
 }
